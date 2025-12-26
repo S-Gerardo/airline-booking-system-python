@@ -4,7 +4,7 @@ Hello, welcome to my first ever Python project. This is a Python based command l
 # Features
 - Domestic flight selection
 - Date validation in MM/DD/YYYY format
-- Passenger bookings, minimum 1 passengers and maximum of 7 passengers
+- Passenger bookings
 - Cabin selection
 - Option to add on additional services
 - Total fare caluclation
