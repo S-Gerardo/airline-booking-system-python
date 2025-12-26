@@ -38,7 +38,7 @@ if flight_choice == "domestic":  # Domestic flight booking process
             day), int(year)  # converts to integers
         # Validates month, day, year
         if 1 <= month_int <= 12 and 1 <= day_int <= 31 and len(year) == 4:
-            # extra validation for months with less than 31 days
+            # Extra validation for months with less than 31 days
             if (month_int == 2 and day_int > 29) or (month_int in [4, 6, 9, 11] and day_int > 30) or year_int < 2026:
                 departure_date = input(
                     "\nInvalid date. Please enter a valid date in MM/DD/YYYY format: ")
@@ -50,7 +50,7 @@ if flight_choice == "domestic":  # Domestic flight booking process
                         day), int(year)  # converts to integers
                     # Validates month, day, year
                     if 1 <= month_int <= 12 and 1 <= day_int <= 31 and len(year) == 4:
-                        # extra validation for months with less than 31 days
+                        # Extra validation for months with less than 31 days
                         if (month_int == 2 and day_int > 29) or (month_int in [4, 6, 9, 11] and day_int > 30) or year_int < 2026:
                             departure_date = input(
                                 "\nInvalid date. Please enter a valid date in MM/DD/YYYY format: ")
@@ -64,7 +64,7 @@ if flight_choice == "domestic":  # Domestic flight booking process
                     day), int(year)  # converts to integers
                 # Validates month, day, year
                 if 1 <= month_int <= 12 and 1 <= day_int <= 31 and len(year) == 4:
-                    # extra validation for months with less than 31 days
+                    # Extra validation for months with less than 31 days
                     if (month_int == 2 and day_int > 29) or (month_int in [4, 6, 9, 11] and day_int > 30) or year_int < 2026:
                         departure_date = input(
                             "\nInvalid date. Please enter a valid date in MM/DD/YYYY format: ")
@@ -160,7 +160,7 @@ if flight_choice == "domestic":  # Domestic flight booking process
         input("\n Invalid choice. Please enter a valid cabin class from the list. ")
 
     # Asks the user to input passenger details
-    passenger_details = []  # store passenger details
+    passenger_details = []  # Store passenger details
 
     for i in range(num_passengers):
         print(f"\nPlease enter the details for passenger {i+1}:")
@@ -180,7 +180,7 @@ if flight_choice == "domestic":  # Domestic flight booking process
     economy_cabin = cabin_class_choice == "Economy"
     business_cabin = cabin_class_choice == "Business"
 
-    booked_seats = []  # list to keep track of booked seats
+    booked_seats = []  # List to keep track of booked seats
 
     if selected_cabin_class == "Economy":
         economy_cabin_layout = ["E", "F", "G", "H", "I"]
@@ -306,13 +306,34 @@ if flight_choice == "domestic":  # Domestic flight booking process
         print(f"{passenger_name}: " +
               (", ".join(services) if services else "No extra services selected"))
 
+    import random  # Allows for random selection of letters
+
     # Asks the user to confirm their booking
     confirm_booking = input(
         "\nDo you want to confirm your booking? (yes/no): ").lower()
-    if confirm_booking == "yes":
-        print("\nThank you for booking with One Way Jet! Your booking has been confirmed. We look forward to flying with you.")
+    if confirm_booking == "yes":  # Generates booking confirmation number
+        used_codes = []  # Store codes to avoid duplicates
+        letters_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        bookings = 1  # Only one booking confirmation number needed
+        if bookings == 1:
+            code = ""
+            while code in used_codes or code == "":
+                # 2 Letters
+                letter1 = random.choice(letters_list)
+                letter2 = random.choice(letters_list)
+
+                # Generates 4 random numbers between 0 and 9999
+                n = random.randint(0, 9999)
+                numbers = str(n).zfill(4)
+
+                # Combine letters and numbers
+                code = letter1 + letter2 + numbers
+
+            used_codes.append(code)
+            print("\nBooking confirmation number:", code)
+        print("\nThank you for booking with One Way Jet! Your booking has been confirmed. We look forward to flying with you.\n")
     elif confirm_booking == "no":
-        print("\nBooking cancelled. Thank you for considering One Way Jet!")
+        print("\nBooking cancelled. Thank you for considering One Way Jet!\n")
 
 else:
     print("Currently, we only support domestic flight bookings. Please check back later for international flight options.")
