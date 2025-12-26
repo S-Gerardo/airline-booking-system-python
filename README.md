@@ -1,2 +1,10 @@
-# airline-booking-system-python
-A console-based system created in Python that simulates an airline booking system including: flight selection. departure dates/times, seat assignment, additional services, and fare calculation.
+# One Way Jet Booking System
+Hello, welcome to my first ever Python project. This is a Python based command line application that simulates the booking process for one-way flights. 
+
+# Features
+- Domestic flight selection
+- Date validation in MM/DD/YYYY format
+- Passenger bookings, minimum 1 passengers and maximum of 7 passengers
+- Cabin selection
+- Option to add on additional services
+- Total fare caluclation
