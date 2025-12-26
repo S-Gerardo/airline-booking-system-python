@@ -8,4 +8,4 @@ Hello, welcome to my first ever Python project. This is a Python based command l
 - Cabin selection
 - Option to add on additional services
 - Generates booking confirmation numbers
-- Total fare caluclation
+- Total fare calculation
