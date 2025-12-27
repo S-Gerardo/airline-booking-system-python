@@ -29,45 +29,45 @@ if flight_choice == "domestic":  # Domestic flight booking process
         f"\nYou have indicated that {num_passengers} passenger(s) will be flying.")
 
     # Asks the user their preferred departure date in MM/DD/YYYY format
-    departure_date = input(
-        "\nPlease enter your preferred departure date (MM/DD/YYYY): ")
-    parts = departure_date.split('/')  # Split the input string into parts
-    if len(parts) == 3 and all(part.isdigit() for part in parts):
-        month, day, year = parts
-        month_int, day_int, year_int = int(month), int(
-            day), int(year)  # converts to integers
-        # Validates month, day, year
-        if 1 <= month_int <= 12 and 1 <= day_int <= 31 and len(year) == 4:
-            # Extra validation for months with less than 31 days
-            if (month_int == 2 and day_int > 29) or (month_int in [4, 6, 9, 11] and day_int > 30) or year_int < 2026:
-                departure_date = input(
-                    "\nInvalid date. Please enter a valid date in MM/DD/YYYY format: ")
-                # Split the input string into parts
-                parts = departure_date.split('/')
-                if len(parts) == 3 and all(part.isdigit() for part in parts):
-                    month, day, year = parts
-                    month_int, day_int, year_int = int(month), int(
-                        day), int(year)  # converts to integers
-                    # Validates month, day, year
-                    if 1 <= month_int <= 12 and 1 <= day_int <= 31 and len(year) == 4:
-                        # Extra validation for months with less than 31 days
-                        if (month_int == 2 and day_int > 29) or (month_int in [4, 6, 9, 11] and day_int > 30) or year_int < 2026:
-                            departure_date = input(
-                                "\nInvalid date. Please enter a valid date in MM/DD/YYYY format: ")
-        else:
-            departure_date = input(
-                "\nInvalid date format. Please enter the date in MM/DD/YYYY format: ")
-            parts = departure_date.split('/')
-            if len(parts) == 3 and all(part.isdigit() for part in parts):
-                month, day, year = parts
-                month_int, day_int, year_int = int(month), int(
-                    day), int(year)  # converts to integers
-                # Validates month, day, year
-                if 1 <= month_int <= 12 and 1 <= day_int <= 31 and len(year) == 4:
-                    # Extra validation for months with less than 31 days
-                    if (month_int == 2 and day_int > 29) or (month_int in [4, 6, 9, 11] and day_int > 30) or year_int < 2026:
-                        departure_date = input(
-                            "\nInvalid date. Please enter a valid date in MM/DD/YYYY format: ")
+    valid_date = False # Flag to track if a valid date has been entered
+    
+    while not valid_date:
+        departure_date = input(
+            "\nPlease enter your preferred departure date (MM/DD/YYYY): ")
+
+        parts = departure_date.split("/")
+
+        month, day, year = parts # Split the date into month, day, and year
+        month_int = int(month)
+        day_int = int(day)
+        year_int = int(year)
+
+        if len(parts) != 3 or not all(part.isdigit() for part in parts): # Basic format check for MM/DD/YYYY
+            print(
+                "\nInvalid date format. Please enter the date in MM/DD/YYYY format. ")
+            continue
+        if month_int < 1 or month_int > 12: # Month must be between 1 and 12
+            input("\nInvalid month. Please enter a valid month (1-12). ")
+            continue
+        if day_int < 1 or day_int > 31: # Day must be between 1 and 31
+            input("\nInvalid day. Please enter a valid day (1-31). ")
+            continue
+        if len(year) != 4 or not year.isdigit(): # Year must be 4 digits
+            input("\nInvalid year. Please enter a valid year (4 digits). ")
+            continue
+        if month_int == 2 and day_int > 29: # February check for 28 days noninclusive
+            input("\nFebruary cannot have more than 29 days. Please enter a valid date. ")
+            continue
+        if month_int in [4, 6, 9, 11] and day_int > 30: # Months with 30 days
+            input(
+                "\nThe selected month cannot have more than 30 days. Please enter a valid date. ")
+            continue
+        if year_int < 2026: # Year validation to prevent past dates
+            input(
+                "\nThe year cannot be in the past. Please enter a valid year (2026 or later). ")
+            continue
+        
+        valid_date = True # A valid date has been entered if all checks are passed
 
         print(
             f"\nYou have selected a departure date of {month_int:02d}/{day_int:02d}/{year}.")
